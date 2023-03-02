@@ -118,8 +118,6 @@ public class MainActivity extends AppCompatActivity {
         context.startService(intentActivity);
     }
 
-
-
     public void onClickMiniPlayer() {
         binding.bottomNavigation.setVisibility(View.GONE);
         binding.layoutMiniPlayer.setVisibility(View.GONE);
@@ -131,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
             sendActionToService(this, MyUtil.ACTION_RESUME);
         }
         sendActionToService(this, MyUtil.ACTION_OPEN_MUSIC_PLAYER);
-
     }
 
     public void openMusicPlayer(FragmentActivity fragmentActivity) {
