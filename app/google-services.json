@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "131585301841",
+    "project_id": "music-66c4c",
+    "storage_bucket": "music-66c4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131585301841:android:7a5c4d3aba3dc1e2310770",
+        "android_client_info": {
+          "package_name": "com.vuongvanduy.music"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131585301841-382dk8qmerugi1p19dh0o15mm0qf9ubq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vuongvanduy.music",
+            "certificate_hash": "4a79d2823d0e2eb425e9a1f080260bd94d117047"
+          }
+        },
+        {
+          "client_id": "131585301841-jgahn2u13cg8q6h60fnkl2kqp10pdo7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCK_4m9xft3f37tsYhi8dKWLVwGPCx0bAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131585301841-jgahn2u13cg8q6h60fnkl2kqp10pdo7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

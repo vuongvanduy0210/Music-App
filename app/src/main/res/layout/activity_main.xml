@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/layout_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_mini_player">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/view_pager_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_mini_player"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_bottom_player"
+        android:visibility="gone"
+        android:padding="10dp"
+        android:background="@drawable/layout_mini_player"
+        android:layout_above="@id/bottom_navigation">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_music"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
+
+        <LinearLayout
+            android:layout_toEndOf="@+id/img_music"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/layout_button">
+
+            <TextView
+                android:id="@+id/tv_music_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="@dimen/text_size_tv_name_song"
+                android:textColor="@color/black"
+                android:lines="1"
+                android:ellipsize="end"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/tv_singer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_tv_singer"
+                android:textColor="@color/black"
+                android:lines="1"
+                android:ellipsize="end"
+                tools:ignore="SpUsage" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="10dp">
+
+            <ImageView
+                android:id="@+id/img_previous"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:src="@drawable/ic_previous"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="5dp"/>
+
+            <ImageView
+                android:id="@+id/img_play"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_pause"
+                android:layout_toEndOf="@id/img_previous"
+                android:layout_centerVertical="true"/>
+
+            <ImageView
+                android:id="@+id/img_next"
+                android:layout_width="40sp"
+                android:layout_height="40sp"
+                android:src="@drawable/ic_next"
+                android:layout_toEndOf="@id/img_play"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="5dp"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_bottom_navigation"
+        android:layout_alignParentBottom="true"
+        android:background="@color/teal_700"
+        app:itemTextColor="@color/custom_bottom_navigation"
+        app:itemIconTint="@color/custom_bottom_navigation"/>
+
+</RelativeLayout>
