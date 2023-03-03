@@ -11,6 +11,8 @@ public class Song implements Serializable {
     private int image;
     private int resource;
 
+    private long id;
+
     public Song(String name, String singer, int image, int resource) {
         this.name = name;
         this.singer = singer;
@@ -48,6 +50,14 @@ public class Song implements Serializable {
 
     public void setResource(int resource) {
         this.resource = resource;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     @NonNull

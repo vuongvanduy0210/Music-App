@@ -8,6 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.vuongvanduy.music.fragment.AllMusicFragment;
 import com.vuongvanduy.music.fragment.FavouriteMusicFragment;
 import com.vuongvanduy.music.fragment.HomeUiFragment;
+import com.vuongvanduy.music.fragment.DeivceMusicFragment;
 
 
 public class FragmentViewPager2Adapter extends FragmentStateAdapter {
@@ -24,13 +25,15 @@ public class FragmentViewPager2Adapter extends FragmentStateAdapter {
                 return new HomeUiFragment();
             case 1:
                 return new AllMusicFragment();
-            default:
+            case 2:
                 return new FavouriteMusicFragment();
+            default:
+                return new DeivceMusicFragment();
         }
     }
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }

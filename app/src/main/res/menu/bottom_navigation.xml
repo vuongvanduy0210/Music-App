@@ -15,4 +15,9 @@
         android:id="@+id/menu_favourite"
         android:icon="@drawable/ic_favourite"
         android:title="@string/menu_favourite_title"/>
+
+    <item
+        android:id="@+id/menu_device"
+        android:icon="@drawable/ic_device"
+        android:title="@string/menu_deivce_title"/>
 </menu>

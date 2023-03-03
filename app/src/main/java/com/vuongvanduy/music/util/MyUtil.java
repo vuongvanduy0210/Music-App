@@ -37,6 +37,7 @@ public class MyUtil {
     public static final String ALL_MUSIC_FRAGMENT_NAME = "AllMusicFragment";
     public static final String FAVOURITE_MUSIC_FRAGMENT_NAME = "FavouriteMusicFragment";
     public static final String MUSIC_PLAYER_FRAGMENT_NAME = "MusicPlayerFragment";
+    public static final String MUSIC_DEVICE_FRAGMENT_NAME = "DeivceMusicFragment";
 
-
+    public static final int REQUEST_PERMISSION_READ_EXTERNAL = 1000;
 }
