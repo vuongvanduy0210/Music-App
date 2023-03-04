@@ -72,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
             int actionMusic = bundle.getInt(MyUtil.KEY_ACTION);
             songs = (List<Song>) bundle.getSerializable(MyUtil.KEY_LIST_SONGS);
 
+            Log.e(MyUtil.MAIN_ACTIVITY_NAME, "List song receive: ");
+            for (Song song1 : songs) {
+                Log.e(MyUtil.MAIN_ACTIVITY_NAME, song1.toString());
+            }
+
             handleLayoutMusic(actionMusic);
         }
     };
@@ -82,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        songs = new ArrayList<>();
 
         LocalBroadcastManager.getInstance(this)
                 .registerReceiver(broadcastReceiver, new IntentFilter(MyUtil.SEND_DATA));
@@ -323,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                 String name = cursor.getString(titleColumn);
                 String singer = cursor.getString(artistColumn);
 
-                Song song = new Song(name, singer, 0, 0);
+                Song song = new Song(name, singer, R.drawable.icon_app, 0);
                 song.setId(id);
                 songs.add(song);
 

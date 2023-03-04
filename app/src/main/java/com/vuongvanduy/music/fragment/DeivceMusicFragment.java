@@ -1,5 +1,6 @@
 package com.vuongvanduy.music.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -52,11 +53,10 @@ public class DeivceMusicFragment extends Fragment {
         Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onViewCreated");
 
         songs = getListSongs();
-        mainActivity.songs = songs;
 
-        Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "List song: ");
+        Log.e(MyUtil.MAIN_ACTIVITY_NAME, "List song: ");
         for (Song song1 : mainActivity.songs) {
-            Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, song1.toString());
+            Log.e(MyUtil.MAIN_ACTIVITY_NAME, song1.toString());
         }
 
         setRecylerViewSongs();
@@ -116,5 +116,46 @@ public class DeivceMusicFragment extends Fragment {
         list.sort((o1, o2) -> Collator.getInstance(new Locale("vi", "VN")).compare(o1.getName(), o2.getName()));
 
         return list;
+    }
+
+    public void onStop() {
+        super.onStop();
+        Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onStop");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onDestroyView");
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onPause");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onDestroy");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onResume");
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onCreate");
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onAttach");
     }
 }

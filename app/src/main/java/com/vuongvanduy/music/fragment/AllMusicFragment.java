@@ -52,11 +52,10 @@ public class AllMusicFragment extends Fragment {
         Log.e(MyUtil.ALL_MUSIC_FRAGMENT_NAME, "onViewCreated");
 
         songs = getListSongs();
-        mainActivity.songs = songs;
 
-        Log.e(MyUtil.ALL_MUSIC_FRAGMENT_NAME, "List song: ");
+        Log.e(MyUtil.MAIN_ACTIVITY_NAME, "List song: ");
         for (Song song1 : mainActivity.songs) {
-            Log.e(MyUtil.ALL_MUSIC_FRAGMENT_NAME, song1.toString());
+            Log.e(MyUtil.MAIN_ACTIVITY_NAME, song1.toString());
         }
 
         setRecylerViewSongs();
