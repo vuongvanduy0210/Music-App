@@ -14,12 +14,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.vuongvanduy.music.R;
 import com.vuongvanduy.music.activity.MainActivity;
 import com.vuongvanduy.music.adapter.SongAdapter;
+
 import com.vuongvanduy.music.databinding.FragmentAllMusicBinding;
 import com.vuongvanduy.music.model.Song;
+import com.vuongvanduy.music.my_interface.IOnClickItemSongListener;
 import com.vuongvanduy.music.util.MyUtil;
 
 import java.text.Collator;
@@ -64,7 +67,17 @@ public class AllMusicFragment extends Fragment {
     }
 
     private void setRecylerViewSongs() {
-        SongAdapter songAdapter = new SongAdapter(this::onClickPlaySong);
+        SongAdapter songAdapter = new SongAdapter(new IOnClickItemSongListener() {
+            @Override
+            public void onClickItemSong(Song song) {
+                onClickPlaySong(song);
+            }
+
+            @Override
+            public void onClickAddToFavourite(Song song) {
+
+            }
+        });
 
         songAdapter.setData(songs);
         RecyclerView rcvListSongs = binding.rcvListSongs;

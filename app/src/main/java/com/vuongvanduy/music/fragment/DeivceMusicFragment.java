@@ -20,6 +20,7 @@ import com.vuongvanduy.music.activity.MainActivity;
 import com.vuongvanduy.music.adapter.SongAdapter;
 import com.vuongvanduy.music.databinding.FragmentMusicDeviceBinding;
 import com.vuongvanduy.music.model.Song;
+import com.vuongvanduy.music.my_interface.IOnClickItemSongListener;
 import com.vuongvanduy.music.util.MyUtil;
 
 import java.text.Collator;
@@ -65,13 +66,24 @@ public class DeivceMusicFragment extends Fragment {
     }
 
     private void setRecylerViewSongs() {
-        SongAdapter songAdapter = new SongAdapter(this::onClickPlaySong);
+        SongAdapter songAdapter = new SongAdapter(new IOnClickItemSongListener() {
+            @Override
+            public void onClickItemSong(Song song) {
+                onClickPlaySong(song);
+            }
+
+            @Override
+            public void onClickAddToFavourite(Song song) {
+
+            }
+        });
 
         songAdapter.setData(songs);
         RecyclerView rcvListSongs = binding.rcvListSongs;
         rcvListSongs.setAdapter(songAdapter);
         rcvListSongs.setLayoutManager(new LinearLayoutManager(mainActivity));
-        DividerItemDecoration decoration = new DividerItemDecoration(mainActivity, DividerItemDecoration.VERTICAL);
+        DividerItemDecoration decoration =
+                new DividerItemDecoration(mainActivity, DividerItemDecoration.VERTICAL);
         rcvListSongs.addItemDecoration(decoration);
     }
 
@@ -113,7 +125,8 @@ public class DeivceMusicFragment extends Fragment {
 
         list = mainActivity.listSongsDeivce;
 
-        list.sort((o1, o2) -> Collator.getInstance(new Locale("vi", "VN")).compare(o1.getName(), o2.getName()));
+        list.sort((o1, o2) -> Collator.getInstance(
+                new Locale("vi", "VN")).compare(o1.getName(), o2.getName()));
 
         return list;
     }

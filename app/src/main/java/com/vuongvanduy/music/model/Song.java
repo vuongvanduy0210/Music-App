@@ -10,8 +10,9 @@ public class Song implements Serializable {
     private String singer;
     private int image;
     private int resource;
-
     private long id;
+    private boolean isFavourite;
+
 
     public Song(String name, String singer, int image, int resource) {
         this.name = name;
@@ -60,6 +61,14 @@ public class Song implements Serializable {
         this.id = id;
     }
 
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        isFavourite = favourite;
+    }
+
     @Override
     public String toString() {
         return "Song{" +
@@ -68,6 +77,7 @@ public class Song implements Serializable {
                 ", image=" + image +
                 ", resource=" + resource +
                 ", id=" + id +
+                ", isFavourite=" + isFavourite +
                 '}';
     }
 }

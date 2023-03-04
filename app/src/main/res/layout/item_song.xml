@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
-    android:visibility="visible"
     android:padding="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -47,5 +46,14 @@
             android:ellipsize="end"/>
 
     </LinearLayout>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/bt_add_favourite"-->
+<!--        android:layout_width="30dp"-->
+<!--        android:layout_height="30dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:src="@drawable/ic_add_favourite"-->
+<!--        android:layout_centerVertical="true"-->
+<!--        android:layout_marginStart="10dp"/>-->
 
 </RelativeLayout>
