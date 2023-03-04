@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     public Song currentSong;
     public List<Song> songs;
     public List<Song> listSongsDefault;
-
     public List<Song> listSongsDeivce;
 
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {

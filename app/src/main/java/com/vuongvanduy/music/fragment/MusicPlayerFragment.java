@@ -150,8 +150,6 @@ public class MusicPlayerFragment extends Fragment {
                 mainActivity.shuffleListSongs();
 //                mainActivity.sendActionToService(mainActivity, MyUtil.ACTION_SHUFFLE);
             }
-
-
         });
 
         binding.btLoop.setOnClickListener(v ->
@@ -161,7 +159,7 @@ public class MusicPlayerFragment extends Fragment {
     private void handleLayoutMusic(int actionMusic) {
         switch (actionMusic) {
             case MyUtil.ACTION_START:
-                break;
+//                break;
             case MyUtil.ACTION_PAUSE:
             case MyUtil.ACTION_NEXT:
             case MyUtil.ACTION_PREVIOUS:

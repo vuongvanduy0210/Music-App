@@ -4,14 +4,17 @@ import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -25,10 +28,11 @@ import com.vuongvanduy.music.broadcast_receiver.MyReceiver;
 import com.vuongvanduy.music.model.Song;
 import com.vuongvanduy.music.util.MyUtil;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
-public class MusicService extends Service implements MediaPlayer.OnCompletionListener {
+public class MusicService extends Service implements MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener {
 
     private static boolean isPlaying, isLooping, isShuffling;
     private MediaPlayer mediaPlayer;
@@ -232,17 +236,44 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             mediaPlayer = null;
         }
 
-        mediaPlayer = MediaPlayer.create(getApplicationContext(), song.getResource());
-        mediaPlayer.start();
+        if (song.getId() == 0) {
+            mediaPlayer = MediaPlayer.create(getApplicationContext(), song.getResource());
+            mediaPlayer.setOnCompletionListener(this);
+            mediaPlayer.setOnPreparedListener(this);
+            mediaPlayer.start();
+        }
+        else {
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setOnCompletionListener(this);
+            mediaPlayer.setOnPreparedListener(this);
+            long id = song.getId();
+            Uri trackUri = ContentUris.withAppendedId(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, id);
+
+            try {
+                mediaPlayer.setDataSource(getApplicationContext(), trackUri);
+                mediaPlayer.prepare();
+            } catch (IOException e) {
+                Log.e(MyUtil.MUSIC_SERVICE_NAME, "Error setting data source");
+            }
+            finalTime = mediaPlayer.getDuration();
+            isPlaying = true;
+
+            Log.e(MyUtil.MUSIC_SERVICE_NAME, "Start music success");
+            return;
+        }
 
         finalTime = mediaPlayer.getDuration();
         isPlaying = true;
 
-
-        mediaPlayer.setOnCompletionListener(this);
-
         updateCurrentTime();
         Log.e(MyUtil.MUSIC_SERVICE_NAME, "Start music success");
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        Log.e(MyUtil.MUSIC_SERVICE_NAME, "onPrepared");
+        mp.start();
+        updateCurrentTime();
     }
 
     private int getIndexFromListSong(Song s) {
@@ -258,7 +289,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     }
 
     private void sendNotification(Song song) {
-
+        Log.e(MyUtil.MUSIC_SERVICE_NAME, "onSendNotification");
         //set layout notification
         Bitmap bitmapImageSong = BitmapFactory.decodeResource(getResources(), song.getImage());
 

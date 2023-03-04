@@ -60,7 +60,6 @@ public class Song implements Serializable {
         this.id = id;
     }
 
-    @NonNull
     @Override
     public String toString() {
         return "Song{" +
@@ -68,6 +67,7 @@ public class Song implements Serializable {
                 ", singer='" + singer + '\'' +
                 ", image=" + image +
                 ", resource=" + resource +
+                ", id=" + id +
                 '}';
     }
 }
