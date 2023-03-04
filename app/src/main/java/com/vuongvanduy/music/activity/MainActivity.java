@@ -290,12 +290,13 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_PERMISSION_READ_EXTERNAL) {
             // neu nhu dong y
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Get music from your phone success", Toast.LENGTH_SHORT).show();
                 // get list song from device and send to music device fragment
                 listSongsDeivce = getListSongFromDevice();
             } else {
                 // neu nhu tu choi
-                Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Can't get music from your phone", Toast.LENGTH_SHORT).show();
+                Log.e(MyUtil.MAIN_ACTIVITY_NAME, "Permission denied");
             }
         }
     }
