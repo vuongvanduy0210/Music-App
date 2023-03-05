@@ -82,7 +82,8 @@
             android:lines="1"
             android:ellipsize="end"
             android:layout_gravity="center_horizontal"
-            tools:ignore="SpUsage" />
+            tools:ignore="SpUsage"
+            android:textStyle="italic"/>
 
     </LinearLayout>
 

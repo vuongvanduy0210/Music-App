@@ -111,8 +111,6 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
             handleActionMusic(actionMusicReceive);
         }
 
-
-
         return START_NOT_STICKY;
     }
 
@@ -147,6 +145,9 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
                 break;
             case MyUtil.ACTION_LOOP:
                 loopMusic();
+                break;
+            case MyUtil.ACTION_RELOAD_DATA:
+                reloadData();
                 break;
         }
     }
@@ -228,6 +229,10 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
     private void loopMusic() {
         isLooping = !isLooping;
         sendData(MyUtil.ACTION_LOOP, songs);
+    }
+
+    private void reloadData() {
+        sendData(MyUtil.ACTION_RELOAD_DATA, songs);
     }
 
     private void startMusic(Song song) {
@@ -404,6 +409,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
 
     @Override
     public void onDestroy() {
+        Log.e(MyUtil.MUSIC_SERVICE_NAME, "onDestroy");
         super.onDestroy();
         if (mediaPlayer != null) {
             mediaPlayer.release();

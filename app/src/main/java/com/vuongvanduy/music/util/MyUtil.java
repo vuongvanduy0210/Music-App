@@ -19,6 +19,7 @@ public class MyUtil {
     public static final int ACTION_CONTROL_SEEK_BAR = 8;
     public static final int ACTION_SHUFFLE = 9;
     public static final int ACTION_LOOP = 10;
+    public static final int ACTION_RELOAD_DATA = 11;
 
     public static final String KEY_SONG = "key_song";
     public static final String KEY_LIST_SONGS = "key_list_song";
@@ -40,4 +41,5 @@ public class MyUtil {
     public static final String MUSIC_DEVICE_FRAGMENT_NAME = "DeivceMusicFragment";
 
     public static final int REQUEST_PERMISSION_READ_EXTERNAL = 1000;
+
 }

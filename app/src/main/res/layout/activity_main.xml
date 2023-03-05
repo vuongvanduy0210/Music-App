@@ -65,7 +65,8 @@
                 android:textColor="@color/black"
                 android:lines="1"
                 android:ellipsize="end"
-                tools:ignore="SpUsage" />
+                tools:ignore="SpUsage"
+                android:textStyle="italic"/>
 
         </LinearLayout>
 
@@ -90,7 +91,7 @@
                 android:id="@+id/img_play"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_pause"
+                android:src="@drawable/ic_play"
                 android:layout_toEndOf="@id/img_previous"
                 android:layout_centerVertical="true"/>
 

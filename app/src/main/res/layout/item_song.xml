@@ -43,7 +43,8 @@
             android:textSize="15dp"
             android:textColor="@color/black"
             android:lines="1"
-            android:ellipsize="end"/>
+            android:ellipsize="end"
+            android:textStyle="italic"/>
 
     </LinearLayout>
 

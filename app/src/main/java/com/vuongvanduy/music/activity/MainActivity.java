@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -24,10 +25,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -35,6 +33,7 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.vuongvanduy.music.R;
 
 import com.vuongvanduy.music.adapter.FragmentViewPager2Adapter;
+
 
 import com.vuongvanduy.music.databinding.ActivityMainBinding;
 import com.vuongvanduy.music.view_pager_transformer.ZoomOutPageTransformer;
@@ -93,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         LocalBroadcastManager.getInstance(this)
                 .registerReceiver(broadcastReceiver, new IntentFilter(MyUtil.SEND_DATA));
 
+        checkServiceIsRunning();
+
         requestPermission();
 
         setViewPager2Adapter();
@@ -100,6 +101,18 @@ public class MainActivity extends AppCompatActivity {
         setOnClickLisnterButtonOnMiniPlayer();
 
         setListenerViewPagerAndBottomNavigation();
+    }
+
+    private void checkServiceIsRunning() {
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> runningServices = activityManager.getRunningServices(Integer.MAX_VALUE);
+
+        for (ActivityManager.RunningServiceInfo serviceInfo : runningServices) {
+            if (serviceInfo.service.getClassName().equals("com.vuongvanduy.music.service.MusicService")) {
+                sendActionReloadData(this, MyUtil.ACTION_RELOAD_DATA);
+                break;
+            }
+        }
     }
 
     private void setViewPager2Adapter() {
@@ -137,6 +150,19 @@ public class MainActivity extends AppCompatActivity {
 
         Bundle bundle = new Bundle();
         bundle.putSerializable(MyUtil.KEY_LIST_SONGS, (Serializable) songs);
+        bundle.putSerializable(MyUtil.KEY_SONG, currentSong);
+//        bundle.putBoolean(MyUtil.KEY_STATUS_SHUFFLE, isShuffling);
+        intentActivity.putExtras(bundle);
+
+        context.startService(intentActivity);
+    }
+
+    public void sendActionReloadData(Context context, int action) {
+        Intent intentActivity = new Intent(context, MusicService.class);
+
+        intentActivity.putExtra(MyUtil.KEY_ACTION, action);
+
+        Bundle bundle = new Bundle();
         bundle.putSerializable(MyUtil.KEY_SONG, currentSong);
 //        bundle.putBoolean(MyUtil.KEY_STATUS_SHUFFLE, isShuffling);
         intentActivity.putExtras(bundle);
@@ -186,6 +212,11 @@ public class MainActivity extends AppCompatActivity {
                 isPlaying = false;
                 setStatusButtonPlay();
                 binding.layoutMiniPlayer.setVisibility(View.GONE);
+                break;
+            case MyUtil.ACTION_RELOAD_DATA:
+                setLayoutForMiniPlayer(currentSong);
+                setStatusButtonPlay();
+                binding.layoutMiniPlayer.setVisibility(View.VISIBLE);
                 break;
         }
     }
@@ -313,6 +344,7 @@ public class MainActivity extends AppCompatActivity {
 
         ContentResolver contentResolver = getContentResolver();
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+        @SuppressLint("Recycle")
         Cursor cursor = contentResolver.query(uri, null, null, null, null);
 
         if (cursor == null) {
