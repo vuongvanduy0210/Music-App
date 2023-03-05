@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                 String name = cursor.getString(titleColumn);
                 String singer = cursor.getString(artistColumn);
 
-                Song song = new Song(name, singer, R.drawable.icon_app, 0);
+                Song song = new Song(name, singer, R.drawable.ic_launcher_playstore, 0);
                 song.setId(id);
                 songs.add(song);
 
