@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
         binding.viewPager2.setVisibility(View.VISIBLE);
     }
 
-    private void requestPermission() {
+    public void requestPermission() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             // get list song from device and send to music device fragment
             listSongsDeivce = getListSongFromDevice();
@@ -302,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
                 listSongsDeivce = getListSongFromDevice();
             } else {
                 // neu nhu tu choi
-                Toast.makeText(this, "Can't get music from your phone", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permission denied. Can't get music from your phone", Toast.LENGTH_SHORT).show();
                 Log.e(MyUtil.MAIN_ACTIVITY_NAME, "Permission denied");
             }
         }
@@ -316,9 +316,9 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = contentResolver.query(uri, null, null, null, null);
 
         if (cursor == null) {
-            Toast.makeText(this, "Something Went Wrong.", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "Something Went Wrong.", Toast.LENGTH_SHORT).show();
         } else if (!cursor.moveToFirst()) {
-            Toast.makeText(this, "No Music Found on SD Card.", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "No Music Found on Your Device.", Toast.LENGTH_SHORT).show();
         } else {
             //get columns
             int idColumn = cursor.getColumnIndex(MediaStore.Audio.Media._ID);

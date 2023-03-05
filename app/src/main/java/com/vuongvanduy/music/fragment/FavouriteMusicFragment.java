@@ -105,6 +105,11 @@ public class FavouriteMusicFragment extends Fragment {
 
     private void setOnClickButtonActionBar() {
         binding.btPlayAll.setOnClickListener(v -> {
+            if (songs == null || songs.isEmpty()) {
+                return;
+            }
+
+            mainActivity.songs = songs;
             mainActivity.currentSong = songs.get(0);
 
             mainActivity.sendActionToService(mainActivity, MyUtil.ACTION_START);

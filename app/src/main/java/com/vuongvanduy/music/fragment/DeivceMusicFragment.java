@@ -1,5 +1,7 @@
 package com.vuongvanduy.music.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.vuongvanduy.music.R;
 import com.vuongvanduy.music.activity.MainActivity;
@@ -48,12 +51,22 @@ public class DeivceMusicFragment extends Fragment {
         return binding.getRoot();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onViewCreated");
 
         songs = getListSongs();
+
+        if (songs.isEmpty()) {
+            binding.tvNotiListSong.setText("No song in list. " +
+                    "Please allow access photos and " +
+                    "media on your device or add new song to your media storage");
+
+            binding.tvNotiListSong.setVisibility(View.VISIBLE);
+            binding.rcvListSongs.setVisibility(View.GONE);
+        }
 
         Log.e(MyUtil.MAIN_ACTIVITY_NAME, "List song: ");
         for (Song song1 : mainActivity.songs) {
@@ -106,6 +119,10 @@ public class DeivceMusicFragment extends Fragment {
 
     private void setOnClickButtonActionBar() {
         binding.btPlayAll.setOnClickListener(v -> {
+            if (songs == null || songs.isEmpty()) {
+                return;
+            }
+
             mainActivity.songs = songs;
             mainActivity.currentSong = songs.get(0);
 
@@ -121,9 +138,11 @@ public class DeivceMusicFragment extends Fragment {
     }
 
     private List<Song> getListSongs() {
-        List<Song> list;
+        List<Song> list = new ArrayList<>();
 
-        list = mainActivity.listSongsDeivce;
+        if (mainActivity.listSongsDeivce != null) {
+            list = mainActivity.listSongsDeivce;
+        }
 
         list.sort((o1, o2) -> Collator.getInstance(
                 new Locale("vi", "VN")).compare(o1.getName(), o2.getName()));
