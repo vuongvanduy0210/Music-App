@@ -182,6 +182,7 @@ public class MusicPlayerFragment extends Fragment {
         binding.circleImageView.setImageResource(currentSong.getImage());
         binding.tvMusicName.setText(currentSong.getName());
         binding.tvSinger.setText(currentSong.getSinger());
+        binding.imgBackGround.setImageResource(currentSong.getImage());
 
         int minutes = (finalTime/1000)/60;
         int seconds = (finalTime/1000)%60;

@@ -6,7 +6,15 @@
     tools:context=".fragment.MusicPlayerFragment"
     android:orientation="vertical"
     android:gravity="center_horizontal"
-    android:background="@drawable/img_bg_music_player">
+    >
+
+    <ImageView
+        android:id="@+id/img_back_ground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_bg_music_player"
+        android:scaleType="centerCrop"
+        android:alpha="0.5"/>
 
     <RelativeLayout
         android:id="@+id/layout_action_bar"
@@ -27,7 +35,7 @@
             android:textAlignment="center"
             android:textAllCaps="false"
             android:background="@color/blueLight"
-            android:src="@drawable/ic_back"/>
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:layout_width="wrap_content"
