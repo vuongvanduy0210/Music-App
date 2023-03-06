@@ -22,6 +22,7 @@ import android.widget.SeekBar;
 
 import com.vuongvanduy.music.R;
 import com.vuongvanduy.music.activity.MainActivity;
+
 import com.vuongvanduy.music.databinding.FragmentMusicPlayerBinding;
 import com.vuongvanduy.music.model.Song;
 import com.vuongvanduy.music.service.MusicService;

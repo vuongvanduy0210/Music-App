@@ -139,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
         binding.imgPrevious.setOnClickListener(v ->
                 sendActionToService(this, MyUtil.ACTION_PREVIOUS));
 
+        binding.imgClear.setOnClickListener(v ->
+                sendActionToService(this, MyUtil.ACTION_CLEAR));
+
         binding.layoutMiniPlayer.setOnClickListener(v -> onClickMiniPlayer());
     }
 
@@ -226,6 +229,7 @@ public class MainActivity extends AppCompatActivity {
         binding.imgMusic.setImageResource(song.getImage());
         binding.tvMusicName.setText(song.getName());
         binding.tvSinger.setText(song.getSinger());
+        binding.imgBgMiniPlayer.setImageResource(song.getImage());
     }
 
     private void setStatusButtonPlay() {

@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:src="@drawable/img_bg_music_player"
         android:scaleType="centerCrop"
-        android:alpha="0.5"/>
+        android:alpha="0.3"/>
 
     <RelativeLayout
         android:id="@+id/layout_action_bar"

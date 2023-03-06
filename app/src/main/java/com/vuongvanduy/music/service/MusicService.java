@@ -302,6 +302,7 @@ public class MusicService extends Service implements MediaPlayer.OnCompletionLis
         notificationLayout.setTextViewText(R.id.tv_music_name_in_notification, song.getName());
         notificationLayout.setTextViewText(R.id.tv_singer_in_notification, song.getSinger());
         notificationLayout.setImageViewBitmap(R.id.img_music_in_notification, bitmapImageSong);
+        notificationLayout.setImageViewBitmap(R.id.img_bg_noti, bitmapImageSong);
 
         //set on click notfication
         Intent intent = new Intent(this, MainActivity.class);

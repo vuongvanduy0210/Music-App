@@ -5,8 +5,15 @@
     android:layout_height="120dp"
     android:layout_alignParentBottom="true"
     android:visibility="visible"
-    android:padding="5dp"
-    android:background="@drawable/img_bg_noti">
+    >
+
+    <ImageView
+        android:id="@+id/img_bg_noti"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_waiting_for_you"
+        android:scaleType="centerCrop"
+        android:alpha="0.2"/>
 
     <ImageView
         android:id="@+id/img_music_in_notification"
@@ -15,7 +22,8 @@
         android:src="@mipmap/ic_launcher"
         android:scaleType="centerCrop"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"/>
 
     <LinearLayout
 
@@ -47,7 +55,7 @@
             android:textColor="@color/black"
             android:lines="1"
             android:ellipsize="end"
-            android:textStyle="italic"/>
+            android:textStyle="italic|bold" />
 
     </LinearLayout>
 
