@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -38,6 +39,8 @@ public class DeivceMusicFragment extends Fragment {
     private MainActivity mainActivity;
 
     private List<Song> songs;
+
+    private SongAdapter songAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,11 +78,13 @@ public class DeivceMusicFragment extends Fragment {
 
         setRecylerViewSongs();
 
+        setOnClickSearchSong();
+
         setOnClickButtonActionBar();
     }
 
     private void setRecylerViewSongs() {
-        SongAdapter songAdapter = new SongAdapter(new IOnClickItemSongListener() {
+        songAdapter = new SongAdapter(new IOnClickItemSongListener() {
             @Override
             public void onClickItemSong(Song song) {
                 onClickPlaySong(song);
@@ -115,6 +120,22 @@ public class DeivceMusicFragment extends Fragment {
         mainActivity.binding.layoutMiniPlayer.setVisibility(View.GONE);
         mainActivity.binding.viewPager2.setVisibility(View.GONE);
 
+    }
+
+    private void setOnClickSearchSong() {
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                songAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                songAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
     }
 
     private void setOnClickButtonActionBar() {

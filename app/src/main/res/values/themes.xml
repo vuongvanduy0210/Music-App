@@ -1,6 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Music" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.Music" parent="Theme.Design.Light.NoActionBar">
+
+<!--        Theme.MaterialComponents.DayNight.DarkActionBar-->
+<!--        Theme.Design.Light.NoActionBar-->
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/blueLight</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
