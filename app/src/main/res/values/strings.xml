@@ -18,4 +18,6 @@
     <string name="channel_name">Channel 1</string>
     <string name="channel_description">This is channel 1</string>
     <string name="dev_name">VuongVanDuy</string>
+
+    <string name="hint_search">Song name...</string>
 </resources>

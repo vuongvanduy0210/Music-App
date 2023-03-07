@@ -1,25 +1,26 @@
 package com.vuongvanduy.music.fragment;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 
-import com.vuongvanduy.music.R;
 import com.vuongvanduy.music.activity.MainActivity;
 import com.vuongvanduy.music.adapter.SongAdapter;
 import com.vuongvanduy.music.databinding.FragmentMusicDeviceBinding;
@@ -43,7 +44,7 @@ public class DeivceMusicFragment extends Fragment {
     private SongAdapter songAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Log.e(MyUtil.MUSIC_DEVICE_FRAGMENT_NAME, "onViewCreate");
@@ -122,20 +123,50 @@ public class DeivceMusicFragment extends Fragment {
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setOnClickSearchSong() {
-        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        binding.edtSearch.setOnTouchListener((v, event) -> {
+            final int DRAWABLE_RIGHT = 2;
+            if (event.getAction() == MotionEvent.ACTION_UP) {
+                if (event.getRawX() >= (binding.edtSearch.getRight() -
+                        binding.edtSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                    // Xử lý sự kiện click vào icon xóa ở đây
+                    binding.edtSearch.setText("");
+                    return true;
+                }
+            }
+            return false;
+        });
+        binding.edtSearch.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                hideKeyboard();
+                return true;
+            }
+            return false;
+        });
+        binding.edtSearch.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                songAdapter.getFilter().filter(query);
-                return false;
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                songAdapter.getFilter().filter(newText);
-                return false;
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                songAdapter.getFilter().filter(s);
             }
         });
+    }
+
+    public void hideKeyboard() {
+        InputMethodManager imm =
+                (InputMethodManager) mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        View view = binding.getRoot();
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private void setOnClickButtonActionBar() {

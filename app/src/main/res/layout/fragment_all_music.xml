@@ -38,17 +38,32 @@
 
     </RelativeLayout>
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/search_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@null"
-        android:background="@drawable/search_view_bg"
-        android:layout_margin="8dp"
-        app:queryHint="Song name..." />
+        android:layout_height="wrap_content">
 
-    <!-- TODO: Update blank fragment layout -->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_search"
+            android:layout_gravity="center"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"/>
+
+        <EditText
+            android:id="@+id/edt_search"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_search"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginTop="5dp"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:drawableEnd="@drawable/ic_clear" />
+
+    </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv_list_songs"
         android:layout_width="match_parent"

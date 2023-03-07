@@ -130,6 +130,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_bottom_navigation"
         android:layout_alignParentBottom="true"
+        android:visibility="visible"
         android:background="@color/teal_700"
         app:itemTextColor="@color/custom_bottom_navigation"
         app:itemIconTint="@color/custom_bottom_navigation" />

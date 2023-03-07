@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.SeekBar;
 
 import com.vuongvanduy.music.R;
@@ -107,15 +108,21 @@ public class MusicPlayerFragment extends Fragment {
                 registerReceiver(broadcastReceiver, new IntentFilter(MyUtil.SEND_DATA));
         LocalBroadcastManager.getInstance(mainActivity).
                 registerReceiver(receiverCurrentTime, new IntentFilter(MyUtil.SEND_CURRENT_TIME));
-
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        Log.e(MyUtil.MUSIC_PLAYER_FRAGMENT_NAME, "onViewCreated");
         super.onViewCreated(view, savedInstanceState);
-
+        hideKeyboard(view);
         setOnClickButtonListener();
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager imm =
+                (InputMethodManager) mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private void setOnClickButtonListener() {
