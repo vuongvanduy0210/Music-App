@@ -115,18 +115,13 @@ public class AllMusicFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void setOnClickSearchSong() {
-        binding.edtSearch.setOnTouchListener((v, event) -> {
-            final int DRAWABLE_RIGHT = 2;
-            if (event.getAction() == MotionEvent.ACTION_UP) {
-                if (event.getRawX() >= (binding.edtSearch.getRight() -
-                        binding.edtSearch.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
-                    // Xử lý sự kiện click vào icon xóa ở đây
-                    binding.edtSearch.setText("");
-                    return true;
-                }
+        binding.imgClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.edtSearch.setText("");
             }
-            return false;
         });
+
         binding.edtSearch.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 hideKeyboard();
