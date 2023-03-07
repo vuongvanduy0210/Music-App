@@ -161,6 +161,7 @@ public class AllMusicFragment extends Fragment {
             }
 
             mainActivity.songs = songs;
+            mainActivity.listSongsDefault = songs;
             mainActivity.currentSong = songs.get(0);
 
             mainActivity.sendActionToService(mainActivity, MyUtil.ACTION_START);
@@ -173,9 +174,6 @@ public class AllMusicFragment extends Fragment {
             mainActivity.binding.viewPager2.setVisibility(View.GONE);
         });
     }
-
-
-
 
     @Override
     public void onStop() {

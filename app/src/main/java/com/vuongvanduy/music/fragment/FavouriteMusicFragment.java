@@ -161,6 +161,7 @@ public class FavouriteMusicFragment extends Fragment {
             }
 
             mainActivity.songs = songs;
+            mainActivity.listSongsDefault = songs;
             mainActivity.currentSong = songs.get(0);
 
             mainActivity.sendActionToService(mainActivity, MyUtil.ACTION_START);
