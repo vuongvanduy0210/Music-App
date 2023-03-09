@@ -190,12 +190,12 @@ public class MainActivity extends AppCompatActivity {
     public void openMusicPlayer(FragmentActivity fragmentActivity) {
         MusicPlayerFragment musicPlayerFragment = new MusicPlayerFragment();
 
-//        fragmentActivity.getSupportFragmentManager().popBackStack();
         FragmentTransaction transaction =
                 fragmentActivity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.layout_fragment, musicPlayerFragment);
-        transaction.addToBackStack("Backstack 1");
-        transaction.commit();
+        transaction.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_right)
+                .replace(R.id.layout_fragment, musicPlayerFragment)
+                .addToBackStack("Backstack 1")
+                .commit();
     }
 
     private void handleLayoutMusic(int actionMusic) {

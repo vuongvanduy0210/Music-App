@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.os.Handler;
@@ -17,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.SeekBar;
@@ -123,6 +126,15 @@ public class MusicPlayerFragment extends Fragment {
         InputMethodManager imm =
                 (InputMethodManager) mainActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    @Nullable
+    @Override
+    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
+        if (!enter && transit == FragmentTransaction.TRANSIT_FRAGMENT_CLOSE) {
+            return AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_right);
+        }
+        return super.onCreateAnimation(transit, enter, nextAnim);
     }
 
     private void setOnClickButtonListener() {
@@ -298,8 +310,14 @@ public class MusicPlayerFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.e("MusicPlayerFragment", "onDestroy");
+        Log.e(MyUtil.MUSIC_PLAYER_FRAGMENT_NAME, "onDestroy");
         LocalBroadcastManager.getInstance(mainActivity).unregisterReceiver(broadcastReceiver);
         LocalBroadcastManager.getInstance(mainActivity).unregisterReceiver(receiverCurrentTime);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Log.e(MyUtil.MUSIC_PLAYER_FRAGMENT_NAME, "onPause");
     }
 }

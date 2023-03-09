@@ -85,9 +85,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         MusicPlayerFragment musicPlayerFragment = new MusicPlayerFragment();
 
         FragmentTransaction transaction = fragmentActivity.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.layout_fragment, musicPlayerFragment);
-        transaction.addToBackStack("Backstack 1");
-        transaction.commit();
+        transaction.setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_right)
+                .replace(R.id.layout_fragment, musicPlayerFragment)
+                .addToBackStack("Backstack 1")
+                .commit();
     }
 
     public void sendActionToService(Context context, int action, Song currentSong, List<Song> songs) {
