@@ -21,7 +21,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -309,11 +308,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void requestPermission() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            // get list song from device and send to music device fragment
-            listSongsDeivce = getListSongFromDevice();
-            return;
-        }
 
         if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             // get list song from device and send to music device fragment
